@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      package="com.online.nutrition.dietdiary"
+      android:versionCode="5"
+      android:versionName="0.5">
+    <uses-sdk android:minSdkVersion="8" />
+
+    <application android:icon="@drawable/icon" android:label="@string/app_name" android:debuggable="false">
+        <activity android:name=".activities.SplashScreenActivity"
+                  android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+			android:name=".activities.LoginActivity"
+			android:label="@string/app_name" android:theme="@android:style/Theme.NoTitleBar"/>
+		<activity
+			android:name=".activities.DietDiaryActivity"
+			android:label="@string/app_name" android:theme="@android:style/Theme.NoTitleBar"
+			android:launchMode="singleInstance" />
+
+		<activity 
+			android:name=".activities.SignupActivity"
+			android:label="@string/app_name" android:theme="@android:style/Theme.NoTitleBar"/>
+		<activity 
+			android:name=".activities.HistoryActivity"
+			android:label="@string/app_name" android:theme="@android:style/Theme.NoTitleBar"/>
+		<activity 
+			android:name=".activities.HistoryActivity2"
+			android:label="@string/app_name" android:theme="@android:style/Theme.NoTitleBar"/>
+		<activity 
+		    android:name=".activities.StatsActivity"
+		    android:label="@string/app_name" android:theme="@android:style/Theme.NoTitleBar"/>
+		<activity 
+			android:name=".activities.CameraActivity"
+			android:label="@string/app_name" android:theme="@android:style/Theme.NoTitleBar"/>
+		<activity
+			android:name=".activities.ImageActivity"
+			android:label="@string/app_name" android:theme="@android:style/Theme.NoTitleBar"/>
+		
+		<activity android:name=".preferences.PreferencesActivity" 
+                  android:theme="@android:style/Theme.NoTitleBar">
+            <intent-filter>
+                <action android:name="com.online.nutrition.dietdiary.action.PREFERENCES"/>
+            </intent-filter>
+            
+            <intent-filter>
+ 				<action android:name="android.intent.action.MEDIA_MOUNTED" />
+ 				<data android:scheme="file" /> 
+			</intent-filter>
+                
+		</activity>
+		
+    </application>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CAMERA"></uses-permission>
+    
+</manifest>

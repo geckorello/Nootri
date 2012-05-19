@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+    <string name="app_name">Nootri</string>
+    <string name="ok">Ok</string>
+    <string name="login_button_sign_text">Logi sisse</string>
+    <string name="login_username_title_text">Email</string>
+    <string name="login_password_title_text">Salasõna</string>
+    <string name="login_button_create_text"> Loo kasutaja konto</string>
+    <string name="take_picture_button">Tee pilt</string>
+    <string name="review_history_button">Vaata ajalugu</string>
+    <string name="review_stats_button">Vaata statistikat</string>
+    <string name="signup_name_title_text">Nimi</string>
+    <string name="signup_username_title_text">Email</string>
+    <string name="signup_password1_title_text">Salasõna</string>
+    <string name="signup_password2_title_text">Korda salasõna</string>
+    <string name="signup_button_submit">Logi sisse</string>
+    <string name="upload_button_text">Lae üles</string>
+    <string name="upload_prompt">Pilt on lisatud üles laadimise järjekorda</string>
+    <string name="login_error">Viga autentsuse määramisel, palun kontrolli oma õigusi!</string>
+    <string name="password_mismatch">Salasõna ei sobi!</string>
+    <string name="service_error">Võrk ei tööta hetkel. Palun proovi hiljem uuesti.</string>
+    <string name="username_error">Selline kasutaja on juba olemas!</string>
+    <string name="menu_log_out">Logi välja</string>
+    <string name="menu_settings">Seaded</string>
+    <string name="no_images">Sul ei ole veel ühtegi pilti!</string>
+    <string name="d_image">Tähelepanu!</string>
+    <string name="d_image_conf">Kustuta</string>
+    <string name="d_image_cancel">Tühista</string>
+    <string name="d_image_info">See kustutab selle pildi, kas soovid jätkata?</string>
+    <string name="signup_password_length">Salasõna peab koosnema vähemalt 6 märgist!</string>
+    <string name="signup_invalid_mail">Palun sisesta kehtiv emaili aadress.</string>
+    <string name="cb1">Hommikusöök</string>
+    <string name="cb2">Lõuna</string>
+    <string name="cb3">Õhtusöök</string>
+    <string name="cb4">Vahepala</string>
+    <string name="cb5">Jook</string>
+    <string name="stats_meals">Söökide arv:</string>
+    <string name="stats_drinks">Jookide arv:</string>
+    <string name="stats_snacks">Vahepalade arv:</string>
+    <string name="stats_breakfast_time">Hommikusöögi aeg:</string>
+    <string name="stats_lunch_time">Lõunasöögi aeg:</string>
+    <string name="stats_dinner_time">Õhtusöögi aeg:</string>
+    <string name="stats_last_meal">Viimane söögikord:</string>
+    <string name="website">nootri.com</string>
+    <string name="no_stats">Sul ei ole veel ühtegi pilti!</string>
+    <string name="signup_success">Kasutaja konto on loodud! Võid nüüd sisse logida.</string>
+    <string name="comment_hint">Kirjuta kommentaar</string>
+</resources>

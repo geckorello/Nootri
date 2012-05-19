@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/vw1"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="left"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:paddingLeft="10dp"
+        android:textColor="#000000"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:id="@+id/meals_layout"
+        android:paddingLeft="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/meals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:text="@string/stats_meals" />
+
+        <TextView
+            android:id="@+id/meals_value"
+            android:paddingLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:layout_toRightOf="@id/meals" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/drinks_layout"
+        android:paddingLeft="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/drinks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:text="@string/stats_drinks" />
+
+        <TextView
+            android:id="@+id/drinks_value"
+            android:paddingLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:layout_toRightOf="@id/drinks" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/snacks_layout"
+        android:paddingLeft="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/snacks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:text="@string/stats_snacks" />
+
+        <TextView
+            android:id="@+id/snacks_value"
+            android:paddingLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:layout_toRightOf="@id/snacks" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/breakfast_layout"
+        android:paddingLeft="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/breakfast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:text="@string/stats_breakfast_time" />
+
+        <TextView
+            android:id="@+id/breakfast_value"
+            android:paddingLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:layout_toRightOf="@id/breakfast" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/lunch_layout"
+        android:paddingLeft="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/lunch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:text="@string/stats_lunch_time" />
+
+        <TextView
+            android:id="@+id/lunch_value"
+            android:paddingLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:layout_toRightOf="@id/lunch" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/dinner_layout"
+        android:paddingLeft="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/dinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:text="@string/stats_dinner_time" />
+
+        <TextView
+            android:id="@+id/dinner_value"
+            android:paddingLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:layout_toRightOf="@id/dinner" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/lastmeal_layout"
+        android:paddingLeft="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/lastmeal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:text="@string/stats_last_meal" />
+
+        <TextView
+            android:id="@+id/lastmeal_value"
+            android:paddingLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:layout_toRightOf="@id/lastmeal" />
+    </RelativeLayout>
+
+</LinearLayout>

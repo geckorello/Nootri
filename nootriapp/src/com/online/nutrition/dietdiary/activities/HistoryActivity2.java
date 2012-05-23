@@ -3,7 +3,10 @@
  */
 package com.online.nutrition.dietdiary.activities;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +35,7 @@ import com.online.nutrition.dietdiary.service.NetworkStatusProvider;
 /**
  * 
  * Class for displaying images in list
+ * 
  * @author aare
  * 
  */
@@ -43,11 +47,22 @@ public class HistoryActivity2 extends ListActivity {
 	private SharedPreferences mSharedPreferences;
 	private String userId;
 	private List<Map<String, Object>> resourceObject;
-	private List<String> dates;
+	private List<String> breakfast;
+	private List<String> lunch;
+	private List<String> dinner;
+	private List<String> snack;
+	private List<String> drink;
+	
+	private Format formatter;
+	private Date date;
+	private String day;
+	private String month;
+	private String time;
+	private String lastDate = "date";
 
 	// log tag
 	private static final String t = "HistoryActivity";
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -93,7 +108,7 @@ public class HistoryActivity2 extends ListActivity {
 		// get the shared preferences object
 		mSharedPreferences = PreferenceManager
 				.getDefaultSharedPreferences(this);
-		
+
 		// define the list which holds the information of the list
 		resourceObject = new ArrayList<Map<String, Object>>();
 
@@ -102,28 +117,62 @@ public class HistoryActivity2 extends ListActivity {
 
 		// get image names from database
 		imageNames = getImagesFromDB();
-		//Log.i("Image",imageNames.toString());
+		//Log.i("Image", breakfast.toString());
 
 		int i = 0;
 		for (String name : imageNames) {
 			data = new HashMap<String, Object>();
 			data.put("img", PATH + name + ".jpg");
-			data.put("date", dates.get(i));
+			date = new Date(new Long(name) * 1000);
+			formatter = new SimpleDateFormat("HH:mm");
+			day = getResources().getStringArray(R.array.weekday_names)[date
+					.getDay()];
+			month = getResources().getStringArray(R.array.month_names)[date
+					.getMonth()];
+			time = formatter.format(date);
+			data.put("time", time);
+			if(breakfast.get(i).equalsIgnoreCase("1") || lunch.get(i).equalsIgnoreCase("1") || dinner.get(i).equalsIgnoreCase("1")){
+				data.put("eat", R.drawable.ic_eat);
+			} else if (snack.get(i).equalsIgnoreCase("1")) {
+				data.put("eat", R.drawable.ic_snack);
+			}else {
+				data.put("eat", R.drawable.ic_empty);
+			}
+			if(drink.get(i).equalsIgnoreCase("1")){
+				data.put("drink", R.drawable.ic_drink);
+			}else {
+				data.put("drink", R.drawable.ic_empty);
+			}
+			if (!lastDate.equalsIgnoreCase(day + ", " + date.getDate() + " "
+					+ month)) {
+				lastDate = day + ", " + date.getDate() + " " + month;
+				data.put("date", lastDate);
+				data.put("clock", R.drawable.ic_clock);
+			} else {
+				data.put("date", "");
+				data.put("clock", "");
+			}
+
 			resourceObject.add(data);
 			i++;
 		}
 
 		// Create list adapter
 		adapter = new SimpleAdapter(this, resourceObject, R.layout.image_row,
-				new String[] { "img", "date" }, new int[] { R.id.img, R.id.date });
+				new String[] { "img", "clock", "date", "time", "eat", "drink" }, new int[] { R.id.img,
+						R.id.clock, R.id.date, R.id.time, R.id.box1, R.id.box2 });
 		setListAdapter(adapter);
 
 		ListView lv = getListView();
 		lv.setTextFilterEnabled(true);
+		lv.setDivider(null);
+		lv.setDividerHeight(0);
 
 		lv.setOnItemClickListener(new OnItemClickListener() {
-			public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-				AlertDialog.Builder confirmation = new AlertDialog.Builder(HistoryActivity2.this);
+			public void onItemClick(AdapterView<?> parent, View view,
+					final int position, long id) {
+				AlertDialog.Builder confirmation = new AlertDialog.Builder(
+						HistoryActivity2.this);
 				confirmation.setTitle(R.string.d_image);
 				confirmation.setMessage(R.string.d_image_info);
 				confirmation.setPositiveButton(R.string.d_image_conf,
@@ -138,7 +187,7 @@ public class HistoryActivity2 extends ListActivity {
 												+ ".jpg");
 								if (!NetworkStatusProvider
 										.isConnected(getApplicationContext())) {
-									//Log.d(t, "Connection unavailable");
+									// Log.d(t, "Connection unavailable");
 								} else {
 									userId = mSharedPreferences
 											.getString(
@@ -147,22 +196,21 @@ public class HistoryActivity2 extends ListActivity {
 									Synchronizer sync = new Synchronizer(userId);
 									sync.startSync();
 								}
-								//Log.d(t, "File deleted");
+								// Log.d(t, "File deleted");
 								imageNames.remove(position);
 								resourceObject.remove(position);
 								adapter.notifyDataSetChanged();
-								
+
 							}
 						});
 				confirmation.setNegativeButton(R.string.d_image_cancel,
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog,
 									int which) {
-								//Log.d("t", "File deletion cancelled");
+								// Log.d("t", "File deletion cancelled");
 							}
 						});
 				confirmation.show();
-				
 
 			}
 		});
@@ -178,7 +226,11 @@ public class HistoryActivity2 extends ListActivity {
 		DataHelper data = new DataHelper();
 		HashMap<String, List<String>> imageData = data.getImageNames();
 		List<String> imageNames = imageData.get("images");
-		dates = imageData.get("dates");
+		breakfast = imageData.get("breakfast");
+		lunch = imageData.get("lunch");
+		dinner = imageData.get("dinner");
+		snack = imageData.get("snack");
+		drink = imageData.get("drink");
 		data.closeConnection();
 		return imageNames;
 	}

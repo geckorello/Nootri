@@ -214,7 +214,6 @@ public class DietDiaryActivity extends Activity {
 
 		// enter picture taking mode button. expects a result.
 		mTakePictureButton = (Button) findViewById(R.id.take_picture);
-		mTakePictureButton.setText(getString(R.string.take_picture_button));
 		mTakePictureButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				Intent i = new Intent(getApplicationContext(),
@@ -225,7 +224,6 @@ public class DietDiaryActivity extends Activity {
 
 		// enter history button. expects a result.
 		mReviewHistoryButton = (Button) findViewById(R.id.review_history);
-		mReviewHistoryButton.setText(getString(R.string.review_history_button));
 		mReviewHistoryButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 
@@ -237,7 +235,6 @@ public class DietDiaryActivity extends Activity {
 		});
 		// enter stats button. expects a result.
 		mReviewStatsButton = (Button) findViewById(R.id.review_stats);
-		mReviewStatsButton.setText(getString(R.string.review_stats_button));
 		mReviewStatsButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				Intent i = new Intent(getApplicationContext(),

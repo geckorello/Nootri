@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
- 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
- 
- 
- 
-    <item android:drawable="@drawable/btn_check_back" />
-        
-    <item>
-        <shape>
-            <padding android:left="60dp"/>
-        </shape>
-    </item>
- 
-   
- 
+
+    <item android:drawable="@drawable/btn_check_back"/>
+    <item><shape>
+            <padding android:left="60dp" />
+        </shape></item>
+
 </selector>

@@ -5,13 +5,10 @@
     <item android:state_pressed="true" >
         <shape>
     	    <gradient
-			    android:startColor="#92d700"
-			    android:endColor="#35a000"
+			    android:startColor="#36a200"
+			    android:endColor="#266706"
 			    android:angle="90"
 			    android:type="linear"/>
-            <stroke
-                android:width="1dp"
-                android:color="#324d25" />
             <corners
                 android:radius="3dp" />
             <padding
@@ -26,9 +23,6 @@
         <shape>      
     	    <solid
       	        android:color="#FF46B630" />
-            <stroke
-                android:width="1dp"
-                android:color="#FF000000" />
             <corners
                 android:radius="9dp" />
             <padding
@@ -42,20 +36,20 @@
     <item>        
         <shape>
     	    <gradient
-			    android:startColor="#266905"
-			    android:endColor="#35a000"
-			    android:angle="90"
+			    android:startColor="#36a200"
+			    android:endColor="#266706"
+			    android:angle="-90"
 			    android:type="linear"/>
-            <stroke
-                android:width="1dp"
-                android:color="#324d25" />
+    	    
             <corners
-                android:radius="3dp" />
+                android:radius="6dp" />
+            <!--<stroke android:width="1dp" 
+                android:color="#70ca44" />-->
             <padding
                 android:left="10dp"
                 android:top="10dp"
                 android:right="10dp"
-                android:bottom="15dp" />
+                android:bottom="10dp" />
         </shape>
     </item>
 </selector>

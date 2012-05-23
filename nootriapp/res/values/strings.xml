@@ -7,15 +7,15 @@
     <string name="login_password_title_text">Password</string>
     <string name="login_button_create_text">Create an account</string>
     <string name="take_picture_button">Take Picture</string>
-    <string name="review_history_button">View History</string>
-    <string name="review_stats_button">View stats</string>
+    <string name="review_history_button">History</string>
+    <string name="review_stats_button">Statistics</string>
     <string name="signup_name_title_text">Your name</string>
     <string name="signup_username_title_text">Email</string>
     <string name="signup_password1_title_text">Password</string>
     <string name="signup_password2_title_text">Repeat password</string>
     <string name="signup_button_submit">Sign up</string>
     <string name="upload_button_text">Upload</string>
-	<string name="upload_prompt">Your picture is added to the upload queue</string>
+	<string name="upload_prompt">Picture saved!</string>
 	<string name="login_error">Authentication error, please check your credentials!</string>
 	<string name="password_mismatch">Your passwords don\'t match!</string>
 	<string name="service_error">Network isn\'t responding at the moment. Please try again later.</string>
@@ -41,8 +41,14 @@
 	<string name="stats_lunch_time">Time of lunch:</string>
 	<string name="stats_dinner_time">Time of dinner:</string>
 	<string name="stats_last_meal">Last meal:</string>
-	<string name="website">nootri.com</string>
+	<string name="website">www.nootri.com</string>
 	<string name="no_stats">You don\'t have any images yet!</string>
    	<string name="signup_success">Your account is created! You can sign in now.</string>   
 	<string name="comment_hint">Type comment</string>
+	<string name="improve_button">Improve Health</string>
+	<string name="menu_button">Menu</string>
+	<string name="comment_title">Short comment</string>
+	<string name="comment_example">Example: Tea with sugar</string>
+	<string name="save_picture">Save Picture</string>
+	<string name="retake_picture">Retake</string>
 </resources>

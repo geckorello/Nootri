@@ -1,17 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/background"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:gravity="bottom"
-    android:orientation="vertical" 
-    android:padding="10dip">
+    android:orientation="vertical"
+    android:padding="10dip" 
+    android:gravity="bottom">
 
-    <ImageButton
+    <Button
         android:id="@+id/takepicture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/button_green_circle"
+        android:drawableTop="@drawable/ic_shoot"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/shoot"
-    	android:background="@drawable/button_green_circle"/>
-</LinearLayout>
+        android:drawablePadding="10sp"
+        android:text="@string/take_picture_button"
+        android:textColor="#FFFFFF"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/back_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/takepicture"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/takepicture"
+        android:background="@drawable/button_green_circle_menu"
+        android:text="@string/menu_button"
+        android:textColor="#FFFFFF"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+</RelativeLayout>

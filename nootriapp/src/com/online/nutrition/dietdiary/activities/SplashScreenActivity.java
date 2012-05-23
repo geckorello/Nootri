@@ -106,7 +106,7 @@ public class SplashScreenActivity extends Activity {
         if (firstRun) {
             startSplashScreen();
         } else {
-        	startActivity(new Intent(SplashScreenActivity.this, DietDiaryActivity.class));
+        	startActivity(new Intent(SplashScreenActivity.this, CameraActivity.class));
         	finish();
         }
         

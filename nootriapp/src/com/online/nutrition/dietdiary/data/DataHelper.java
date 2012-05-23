@@ -8,7 +8,6 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
-import android.util.Log;
 
 import com.online.nutrition.dietdiary.database.DDSQLiteOpenHelper;
 
@@ -189,13 +188,21 @@ public class DataHelper {
 	    public HashMap<String, List<String>> getImageNames(){
 	    	List<String> images = new ArrayList<String>();
 	    	List<String> isUploaded = new ArrayList<String>();
-	    	List<String> dates = new ArrayList<String>();
-	    	Cursor cursor = query(new String[] { "timestamp","uploaded", "datetime(timestamp,'unixepoch','localtime') AS date" }, "deleted IS NOT "+1, null, null, null, "timestamp desc", null);
+	    	List<String> cb1 = new ArrayList<String>();
+	    	List<String> cb2 = new ArrayList<String>();
+	    	List<String> cb3 = new ArrayList<String>();
+	    	List<String> cb4 = new ArrayList<String>();
+	    	List<String> cb5 = new ArrayList<String>();
+	    	Cursor cursor = query(new String[] { "timestamp","uploaded", "cb1", "cb2", "cb3", "cb4", "cb5" }, "deleted IS NOT "+1, null, null, null, "timestamp desc", null);
 	    	if (cursor.moveToFirst()) {
 				do {
 					images.add(cursor.getString(0));
 					isUploaded.add(Integer.toString(cursor.getInt(1)));
-					dates.add(cursor.getString(2));
+					cb1.add(cursor.getString(2));
+					cb2.add(cursor.getString(3));
+					cb3.add(cursor.getString(4));
+					cb4.add(cursor.getString(5));
+					cb5.add(cursor.getString(6));
 				} while (cursor.moveToNext());
 			}
 			if (cursor != null && !cursor.isClosed()) {
@@ -204,7 +211,11 @@ public class DataHelper {
 			data = new HashMap<String, List<String>>();
 			data.put("images", images);
 			data.put("isUploaded", isUploaded);
-			data.put("dates", dates);
+			data.put("breakfast", cb1);
+			data.put("lunch", cb2);
+			data.put("dinner", cb3);
+			data.put("snack", cb4);
+			data.put("drink", cb5);
 			//Log.d(t,data.toString());
 			return data;
 	    }

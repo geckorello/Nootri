@@ -9,14 +9,13 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.online.nutrition.dietdiary.R;
@@ -35,8 +34,8 @@ public class ImageActivity extends Activity {
 	private LinearLayout imageLayout;
 
 	// buttons
-	private ImageButton mUploadButton;
-	private ImageButton mRetakeButton;
+	private Button mUploadButton;
+	private Button mRetakeButton;
 	
 	// additional info
 	private RadioButton mCheckBox1;
@@ -86,8 +85,8 @@ public class ImageActivity extends Activity {
 		
 		Bundle extras = getIntent().getExtras();
 		imageTime = extras.getString("time");
-
-		mUploadButton = (ImageButton) findViewById(R.id.upload_button);
+		
+		mUploadButton = (Button) findViewById(R.id.upload_button);
 		mUploadButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				// get the tempfile
@@ -137,7 +136,7 @@ public class ImageActivity extends Activity {
 
 			}
 		});
-		mRetakeButton = (ImageButton) findViewById(R.id.retake_button);
+		mRetakeButton = (Button) findViewById(R.id.retake_button);
 		mRetakeButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				Intent i = new Intent(getApplicationContext(), CameraActivity.class);

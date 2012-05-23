@@ -8,6 +8,7 @@ import java.io.IOException;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.PixelFormat;
 import android.hardware.Camera;
 import android.hardware.Camera.AutoFocusCallback;
@@ -26,7 +27,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.online.nutrition.dietdiary.R;
 import com.online.nutrition.dietdiary.application.Diary;
@@ -52,10 +53,11 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 	private int degrees;
 
 	// Buttons
-	private ImageButton buttonTakePicture;
+	private Button buttonTakePicture;
+	private Button buttonBackToMenu;
 
 	// layout components
-	private LinearLayout layoutBackground;
+	private RelativeLayout layoutBackground;
 	private LayoutParams layoutParamsControl;
 
 
@@ -80,7 +82,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 		////Log.i(t, "Cameractivity, started.");
 
 		// set screen orientation to landscape
-		// setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 		// set up surface
 		getWindow().setFormat(PixelFormat.UNKNOWN);
@@ -92,22 +94,31 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 		// put taking picture button overlay
 		controlInflater = LayoutInflater.from(getBaseContext());
 		View viewControl = controlInflater.inflate(R.layout.control, null);
-		layoutParamsControl = new LayoutParams(LayoutParams.FILL_PARENT,
-				LayoutParams.FILL_PARENT);
+		layoutParamsControl = new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.FILL_PARENT);
 		this.addContentView(viewControl, layoutParamsControl);
 
-		// get button
-		buttonTakePicture = (ImageButton) findViewById(R.id.takepicture);
+		// get buttons
+		buttonTakePicture = (Button) findViewById(R.id.takepicture);
 		buttonTakePicture.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View arg0) {
 				camera.takePicture(myShutterCallback, myPictureCallback_RAW,
 						myPictureCallback_JPG);
 			}
 		});
+		
+		buttonBackToMenu = (Button) findViewById(R.id.back_menu);
+		buttonBackToMenu.setOnClickListener(new Button.OnClickListener() {
+			public void onClick(View arg0) {
+				Intent i = new Intent(getApplicationContext(), DietDiaryActivity.class);
+    			startActivity(i);
+    			finish();
+			}
+		});
+
 
 		// camera backgroud layout
-		layoutBackground = (LinearLayout) findViewById(R.id.background);
-		layoutBackground.setOnClickListener(new LinearLayout.OnClickListener() {
+		layoutBackground = (RelativeLayout) findViewById(R.id.background);
+		layoutBackground.setOnClickListener(new RelativeLayout.OnClickListener() {
 			public void onClick(View arg0) {
 				buttonTakePicture.setEnabled(false);
 				camera.autoFocus(myAutoFocusCallback);
@@ -175,7 +186,6 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 			i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			i.putExtra("time", now);
 			startActivity(i);
-			finish();
 		}
 
 	};

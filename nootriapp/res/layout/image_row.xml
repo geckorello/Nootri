@@ -2,8 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/vw1"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal" >
+    android:layout_height="fill_parent"
+    android:orientation="horizontal" 
+    >
 
     <RelativeLayout
         android:id="@+id/day"
@@ -14,7 +15,7 @@
             android:id="@+id/clock"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp" />
+            android:layout_marginLeft="15dp" />
 
         <TextView
             android:id="@+id/date"
@@ -22,19 +23,22 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerInParent="true"
-            android:layout_marginLeft="5dip"
+            android:layout_marginLeft="5dp"
             android:layout_toRightOf="@id/clock"
-            android:text="Monday, 15 May"
             android:textColor="#f9ce46"
-            android:textSize="22dip" />
+            android:textSize="22dp" />
     </RelativeLayout>
 
     <ImageView
         android:id="@+id/img"
-        android:layout_width="140px"
-        android:layout_height="170px"
+        android:layout_width="100dp"
+        android:layout_height="128dp"
         android:layout_below="@id/day"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="15dp"
+        android:background="@drawable/frame_square"
+        android:drawableBottom="@android:color/white"
+        android:drawableTop="@android:color/white"
+        android:padding="5dp"
         android:scaleType="centerCrop" />
 
     <RelativeLayout
@@ -51,11 +55,11 @@
             android:layout_height="wrap_content"
             android:background="@drawable/button_green"
             android:paddingBottom="3dp"
-            android:paddingLeft="71dp"
-            android:paddingRight="71dp"
+            android:paddingLeft="76dp"
+            android:paddingRight="75dp"
             android:paddingTop="3dp"
             android:textColor="#ffffff"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <ImageView
@@ -63,19 +67,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/time"
+            android:layout_marginTop="3dp"
             android:background="@drawable/grey_square"
-            android:src="@drawable/ic_empty"
-            android:layout_marginTop="3dp" />
+            android:src="@drawable/ic_empty" />
+
         <ImageView
             android:id="@+id/box2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/time"
-            android:background="@drawable/grey_square"
-            android:layout_marginTop="3dp"
             android:layout_marginLeft="3dp"
-            android:src="@drawable/ic_empty"
-            android:layout_toRightOf="@id/box1"/>
+            android:layout_marginTop="3dp"
+            android:layout_toRightOf="@id/box1"
+            android:background="@drawable/grey_square"
+            android:src="@drawable/ic_empty" />
     </RelativeLayout>
 
 </RelativeLayout>

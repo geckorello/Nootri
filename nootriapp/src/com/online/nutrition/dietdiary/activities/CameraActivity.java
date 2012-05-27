@@ -186,6 +186,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 			i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			i.putExtra("time", now);
 			startActivity(i);
+			finish();
 		}
 
 	};
@@ -228,7 +229,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 		// TODO Auto-generated method stub
 		try {
 			////Log.d("TAG", "surfaceCreated method");
-			camera = Camera.open(0);
+			camera = Camera.open();
 		} catch (NoSuchMethodError e) {
 			// e.printStackTrace();
 			camera = Camera.open();

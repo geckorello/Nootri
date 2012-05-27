@@ -1,34 +1,28 @@
 /**
  * 
- * 
  */
 package com.online.nutrition.dietdiary.activities;
 
-import java.io.File;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
+import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.content.res.TypedArray;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.BaseAdapter;
-import android.widget.Gallery;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
 import com.online.nutrition.dietdiary.R;
 import com.online.nutrition.dietdiary.application.Diary;
@@ -37,28 +31,191 @@ import com.online.nutrition.dietdiary.image.ImageManager;
 import com.online.nutrition.dietdiary.preferences.PreferencesActivity;
 import com.online.nutrition.dietdiary.server.Synchronizer;
 import com.online.nutrition.dietdiary.service.NetworkStatusProvider;
-import com.online.nutrition.dietdiary.utils.FileUtils;
 
 /**
- * Displays taken photos in gallery
  * 
- * @author Mihkel Vunk (mihkel.vunk#gmail.com)
+ * Class for displaying images in list
+ * 
+ * @author aare
  * 
  */
+public class HistoryActivity extends ListActivity {
 
-public class HistoryActivity extends Activity {
-
-	// history objects
-	private Gallery gallery;
-	private ImageView imgView;
+	private final String PATH = Diary.IMAGE_PATH + "/";
 	private List<String> imageNames;
+	private SimpleAdapter adapter;
 	private SharedPreferences mSharedPreferences;
 	private String userId;
-	private AddImgAdp addImgAdp;
-	private TextView notification;
+	private List<Map<String, Object>> resourceObject;
+	private List<String> breakfast;
+	private List<String> lunch;
+	private List<String> dinner;
+	private List<String> snack;
+	private List<String> drink;
+	
+	private Format formatter;
+	private Date date;
+	private String day;
+	private String month;
+	private String time;
+	private String lastDate = "date";
 
 	// log tag
 	private static final String t = "HistoryActivity";
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onStop()
+	 */
+	@Override
+	protected void onStop() {
+		super.onStop();
+
+		SharedPreferences settings = getPreferences(MODE_WORLD_WRITEABLE);
+		SharedPreferences.Editor editor = settings.edit();
+
+		// Save the edits
+		editor.commit();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onPause()
+	 */
+	@Override
+	protected void onPause() {
+		super.onPause();
+	};
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onResume()
+	 */
+	@Override
+	protected void onResume() {
+		super.onResume();
+	}
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		setContentView(R.layout.gallery);
+
+		// get the shared preferences object
+		mSharedPreferences = PreferenceManager
+				.getDefaultSharedPreferences(this);
+
+		// define the list which holds the information of the list
+		resourceObject = new ArrayList<Map<String, Object>>();
+
+		// define the map which will hold the information for each row
+		Map<String, Object> data;
+
+		// get image names from database
+		imageNames = getImagesFromDB();
+		//Log.i("Image", breakfast.toString());
+
+		int i = 0;
+		for (String name : imageNames) {
+			data = new HashMap<String, Object>();
+			data.put("img", PATH + name + ".jpg");
+			date = new Date(new Long(name) * 1000);
+			formatter = new SimpleDateFormat("HH:mm");
+			day = getResources().getStringArray(R.array.weekday_names)[date
+					.getDay()];
+			month = getResources().getStringArray(R.array.month_names)[date
+					.getMonth()];
+			time = formatter.format(date);
+			data.put("time", time);
+			if(breakfast.get(i).equalsIgnoreCase("1") || lunch.get(i).equalsIgnoreCase("1") || dinner.get(i).equalsIgnoreCase("1")){
+				data.put("eat", R.drawable.ic_eat);
+			} else if (snack.get(i).equalsIgnoreCase("1")) {
+				data.put("eat", R.drawable.ic_snack);
+			}else {
+				data.put("eat", R.drawable.ic_empty);
+			}
+			if(drink.get(i).equalsIgnoreCase("1")){
+				data.put("drink", R.drawable.ic_drink);
+			}else {
+				data.put("drink", R.drawable.ic_empty);
+			}
+			if (!lastDate.equalsIgnoreCase(day + ", " + date.getDate() + " "
+					+ month)) {
+				lastDate = day + ", " + date.getDate() + " " + month;
+				data.put("date", lastDate);
+				data.put("clock", R.drawable.ic_clock);
+			} else {
+				data.put("date", "");
+				data.put("clock", "");
+			}
+
+			resourceObject.add(data);
+			i++;
+		}
+
+		// Create list adapter
+		adapter = new SimpleAdapter(this, resourceObject, R.layout.image_row,
+				new String[] { "img", "clock", "date", "time", "eat", "drink" }, new int[] { R.id.img,
+						R.id.clock, R.id.date, R.id.time, R.id.box1, R.id.box2 });
+		setListAdapter(adapter);
+
+		ListView lv = getListView();
+		lv.setTextFilterEnabled(true);
+		lv.setDivider(null);
+		lv.setDividerHeight(0);
+
+		lv.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> parent, View view,
+					final int position, long id) {
+				AlertDialog.Builder confirmation = new AlertDialog.Builder(
+						HistoryActivity.this);
+				confirmation.setTitle(R.string.d_image);
+				confirmation.setMessage(R.string.d_image_info);
+				confirmation.setPositiveButton(R.string.d_image_conf,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int which) {
+								ImageManager _imMng = new ImageManager();
+								_imMng.deleteImageFile(
+										imageNames.get(position),
+										Diary.IMAGE_PATH + "/"
+												+ imageNames.get(position)
+												+ ".jpg");
+								if (!NetworkStatusProvider
+										.isConnected(getApplicationContext())) {
+									// Log.d(t, "Connection unavailable");
+								} else {
+									userId = mSharedPreferences
+											.getString(
+													PreferencesActivity.KEY_USER_ID,
+													"");
+									Synchronizer sync = new Synchronizer(userId);
+									sync.startSync();
+								}
+								// Log.d(t, "File deleted");
+								imageNames.remove(position);
+								resourceObject.remove(position);
+								adapter.notifyDataSetChanged();
+
+							}
+						});
+				confirmation.setNegativeButton(R.string.d_image_cancel,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int which) {
+								// Log.d("t", "File deletion cancelled");
+							}
+						});
+				confirmation.show();
+
+			}
+		});
+
+	}
 
 	/**
 	 * Gets image names from database
@@ -69,195 +226,13 @@ public class HistoryActivity extends Activity {
 		DataHelper data = new DataHelper();
 		HashMap<String, List<String>> imageData = data.getImageNames();
 		List<String> imageNames = imageData.get("images");
+		breakfast = imageData.get("breakfast");
+		lunch = imageData.get("lunch");
+		dinner = imageData.get("dinner");
+		snack = imageData.get("snack");
+		drink = imageData.get("drink");
 		data.closeConnection();
 		return imageNames;
-	}
-
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.history);
-
-		//Log.i(t, "HistoryActivity started.");
-
-		// get the shared preferences object
-		mSharedPreferences = PreferenceManager
-				.getDefaultSharedPreferences(this);
-		// get image names from database
-		imageNames = getImagesFromDB();
-		// find big image view
-		imgView = (ImageView) findViewById(R.id.ImageView01);
-		// get notification
-		notification = (TextView) findViewById(R.id.noImg);
-
-		// Check if there are images in db
-		if (imageNames.isEmpty()) {
-			//Log.d(t, "No images in DB");
-			notification.setVisibility(View.VISIBLE);
-			// Build view
-		} else {
-			File imageFile = new File(Diary.IMAGE_PATH + "/"
-					+ imageNames.get(0) + ".jpg");
-			imgView.setImageBitmap(FileUtils.getBitmapScaledToDisplay(
-					imageFile, 400, 400)); //is this the right size?
-
-			// get galleryview
-			gallery = (Gallery) findViewById(R.id.examplegallery);
-			//Initialize adapter
-			addImgAdp = new AddImgAdp(this);
-			gallery.setAdapter(addImgAdp);
-
-			// set onclicks to every image
-			gallery.setOnItemClickListener(new OnItemClickListener() {
-				public void onItemClick(AdapterView parent, View v,
-						int position, long id) {
-					File imageFile = new File(Diary.IMAGE_PATH + "/"
-							+ imageNames.get(position) + ".jpg");
-					imgView.setImageBitmap(FileUtils.getBitmapScaledToDisplay(
-							imageFile, 400, 400));
-				}
-			});
-			//set delete dialog onlongclick
-			gallery.setOnItemLongClickListener(new OnItemLongClickListener() {
-				public boolean onItemLongClick(AdapterView parent, View v,
-						final int position, long id) {
-					AlertDialog.Builder confirmation = new AlertDialog.Builder(
-							HistoryActivity.this);
-					confirmation.setTitle(R.string.d_image);
-					confirmation.setMessage(R.string.d_image_info);
-					confirmation.setPositiveButton(R.string.d_image_conf,
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog,
-										int which) {
-									ImageManager _imMng = new ImageManager();
-									_imMng.deleteImageFile(
-											imageNames.get(position),
-											Diary.IMAGE_PATH + "/"
-													+ imageNames.get(position)
-													+ ".jpg");
-									if (!NetworkStatusProvider
-											.isConnected(getApplicationContext())) {
-										//Log.d(t,"Connection unavailable");
-									} else {
-										userId = mSharedPreferences
-												.getString(
-														PreferencesActivity.KEY_USER_ID,
-														"");
-										Synchronizer sync = new Synchronizer(
-												userId);
-										sync.startSync();
-									}
-									//Log.d(t, "File deleted");
-									imageNames.remove(position);
-									addImgAdp.notifyDataSetChanged();
-									imgView.setImageBitmap(null);
-									if (imageNames.isEmpty())
-										notification
-												.setVisibility(View.VISIBLE);
-								}
-							});
-					confirmation.setNegativeButton(R.string.d_image_cancel,
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog,
-										int which) {
-									//Log.d("t","File deletion cancelled");
-								}
-							});
-					confirmation.show();
-					return true;
-
-				}
-			});
-
-		}
-
-	}
-
-	/**
-	 * Add image adapter
-	 * helps to build gallery
-	 * 
-	 *  @author Mihkel Vunk (mihkel.vunk#gmail.com)
-	 *
-	 */
-	public class AddImgAdp extends BaseAdapter {
-		int GalItemBg;
-		private Context cont;
-
-		/**
-		 * Adapter constructor
-		 * @param c - application context
-		 */
-		public AddImgAdp(Context c) {
-			cont = c;
-			TypedArray typArray = obtainStyledAttributes(R.styleable.HistoryActivity);
-			GalItemBg = typArray.getResourceId(
-					R.styleable.HistoryActivity_android_galleryItemBackground,
-					0);
-			typArray.recycle();
-		}
-
-		
-		/**
-		 * Get Count
-		 * @return returns number of images
-		 */
-		public int getCount() {
-			return imageNames.size();
-		}
-
-		/**
-		 * Get item position
-		 * @param position  - image position
-		 * @return returns image in certain position
-		 */
-		public Object getItem(int position) {
-			return position;
-		}
-
-		/**
-		 * Get item position
-		 * @param position - image position
-		 * @return returns item position
-		 */
-		public long getItemId(int position) {
-			return position;
-		}
-
-		/** 
-		 * Get view - builds imageview
-		 * @param position - image position
-		 * @param convertView - converted view
-		 * @param parent - parent of a view
-		 * @return returns imageview
-		 */
-		public View getView(int position, View convertView, ViewGroup parent) {
-			DataHelper data = new DataHelper();
-
-			ImageView imgView = new ImageView(cont);
-
-			File imageFile = new File(Diary.IMAGE_PATH + "/"
-					+ imageNames.get(position) + ".jpg");
-			Bitmap scaled = FileUtils.getBitmapScaledToDisplay(imageFile, 150,
-					150);
-			Bitmap thumb = scaled.copy(Bitmap.Config.ARGB_8888, true);
-
-			HashMap<String, List<String>> iMgs = data.getUploadImages();
-			//Log.d("t", iMgs.get("timestamp").toString());
-			if (iMgs.get("timestamp").contains(imageNames.get(position))) {
-				Canvas canv = new Canvas(thumb);
-				BitmapFactory.Options options = new BitmapFactory.Options();
-				Bitmap badge = BitmapFactory.decodeResource(
-						cont.getResources(), R.drawable.cross, options);
-				canv.drawBitmap(badge, (float) 150, (float) 105, new Paint());
-			}
-
-			imgView.setImageBitmap(thumb);
-			imgView.setLayoutParams(new Gallery.LayoutParams(150, 140));
-			imgView.setScaleType(ImageView.ScaleType.FIT_XY);
-			imgView.setBackgroundResource(GalItemBg);
-			data.closeConnection();
-			return imgView;
-		}
 	}
 
 }

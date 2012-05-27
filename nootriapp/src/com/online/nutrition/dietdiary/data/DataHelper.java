@@ -262,28 +262,28 @@ public class DataHelper {
 	    	List<String> lunchTime = new ArrayList<String>();
 	    	List<String> dinnerTime = new ArrayList<String>();
 	    	List<String> lastMealTime = new ArrayList<String>();
-			Cursor cursor = rawQuery("SELECT date(di.timestamp,'unixepoch','localtime') AS date," +
+	    	Cursor cursor = rawQuery("SELECT date(di.timestamp,'unixepoch','localtime') AS date, timestamp," +
 					"COUNT(CASE WHEN di.cb5 != 1  THEN 1 ELSE null END) AS meals, " +
 					"SUM(di.cb5) AS drinks," +
 					"SUM(di.cb4) AS snacks," +
-					"(SELECT datetime(d.timestamp,'unixepoch','localtime') FROM "+DIARY_TABLE_NAME+" AS d WHERE d.cb1 = 1 AND date(d.timestamp,'unixepoch','localtime') = date(di.timestamp,'unixepoch','localtime') ORDER BY d.timestamp DESC LIMIT 1) AS breakfastTime, " +
-					"(SELECT datetime(d.timestamp,'unixepoch','localtime') FROM "+DIARY_TABLE_NAME+" AS d WHERE d.cb2 = 1 AND date(d.timestamp,'unixepoch','localtime') = date(di.timestamp,'unixepoch','localtime') ORDER BY d.timestamp DESC LIMIT 1) AS lunchTime," +
-					"(SELECT datetime(d.timestamp,'unixepoch','localtime') FROM "+DIARY_TABLE_NAME+" AS d WHERE d.cb3 = 1 AND date(d.timestamp,'unixepoch','localtime') = date(di.timestamp,'unixepoch','localtime') ORDER BY d.timestamp DESC LIMIT 1) AS dinnerTime," +
-					"(SELECT datetime(d.timestamp,'unixepoch','localtime') FROM "+DIARY_TABLE_NAME+" AS d WHERE (d.cb5 != 1 OR d.cb1 = 1 OR d.cb2 = 1 OR d.cb3 = 1 OR d.cb4 = 1 ) " +
+					"(SELECT strftime('%H:%M', d.timestamp,'unixepoch','localtime') FROM "+DIARY_TABLE_NAME+" AS d WHERE d.cb1 = 1 AND date(d.timestamp,'unixepoch','localtime') = date(di.timestamp,'unixepoch','localtime') ORDER BY d.timestamp DESC LIMIT 1) AS breakfastTime, " +
+					"(SELECT strftime('%H:%M', d.timestamp,'unixepoch','localtime') FROM "+DIARY_TABLE_NAME+" AS d WHERE d.cb2 = 1 AND date(d.timestamp,'unixepoch','localtime') = date(di.timestamp,'unixepoch','localtime') ORDER BY d.timestamp DESC LIMIT 1) AS lunchTime," +
+					"(SELECT strftime('%H:%M', d.timestamp,'unixepoch','localtime') FROM "+DIARY_TABLE_NAME+" AS d WHERE d.cb3 = 1 AND date(d.timestamp,'unixepoch','localtime') = date(di.timestamp,'unixepoch','localtime') ORDER BY d.timestamp DESC LIMIT 1) AS dinnerTime," +
+					"(SELECT strftime('%H:%M', d.timestamp,'unixepoch','localtime') FROM "+DIARY_TABLE_NAME+" AS d WHERE (d.cb5 != 1 OR d.cb1 = 1 OR d.cb2 = 1 OR d.cb3 = 1 OR d.cb4 = 1 ) " +
 					"AND date(d.timestamp,'unixepoch','localtime') = date(di.timestamp,'unixepoch','localtime')  ORDER BY d.timestamp DESC LIMIT 1) AS lastMealTime" +
 					" FROM "+DIARY_TABLE_NAME+" AS di " +
 					"GROUP BY date " +
 					"ORDER BY date DESC;");
 			if (cursor.moveToFirst()) {
 				do {
-					dates.add(cursor.getString(0));
-					meals.add(cursor.getString(1));
-					drinks.add(cursor.getString(2));
-					snacks.add(cursor.getString(3));
-					breakfastTime.add(cursor.getString(4));
-					lunchTime.add(cursor.getString(5));
-					dinnerTime.add(cursor.getString(6));
-					lastMealTime.add(cursor.getString(7));
+					dates.add(cursor.getString(1));
+					meals.add(cursor.getString(2));
+					drinks.add(cursor.getString(3));
+					snacks.add(cursor.getString(4));
+					breakfastTime.add(cursor.getString(5));
+					lunchTime.add(cursor.getString(6));
+					dinnerTime.add(cursor.getString(7));
+					lastMealTime.add(cursor.getString(8));
 				} while (cursor.moveToNext());
 			}
 			if (cursor != null && !cursor.isClosed()) {

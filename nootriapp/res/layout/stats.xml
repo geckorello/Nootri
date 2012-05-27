@@ -2,16 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@android:color/white"
-    android:orientation="vertical" >
+    android:background="@drawable/background"
+    android:orientation="vertical">
     
     <ListView
- 		android:id="@id/android:list"
+        android:id="@id/android:list"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1"
         android:cacheColorHint="#00000000"
- 		android:drawSelectorOnTop="false"/>
+        android:drawSelectorOnTop="false"
+        android:headerDividersEnabled="false"
+        android:scrollingCache="true" 
+        android:smoothScrollbar="true"
+        android:layout_marginTop="10dp"/>
 
     <RelativeLayout android:orientation="horizontal"
                   android:layout_width="fill_parent"
@@ -25,7 +29,7 @@
 		        android:gravity="center"
 		        android:text="@string/no_stats"
 		        android:textAppearance="?android:attr/textAppearanceLarge"
-		        android:textColor="#000000">
+		        android:textColor="#f9ce46">
     		</TextView>
     </RelativeLayout> 
     

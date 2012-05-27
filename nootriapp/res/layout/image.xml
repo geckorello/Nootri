@@ -1,187 +1,200 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:layout_gravity="center"
-    android:gravity="center_vertical"
-    android:orientation="vertical" >
+    android:layout_marginBottom="0dp"
+    android:layout_marginLeft="0dp"
+    android:layout_marginRight="0dp"
+    android:layout_marginTop="0dp"
+    android:orientation="vertical"
+    android:padding="0dp"
+    android:id="@+id/imageoverlay" >
 
-    <LinearLayout
-        android:id="@+id/imageoverlay"
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:orientation="vertical" >
+        android:layout_gravity="center"
+        android:fillViewport="true"
+        android:orientation="vertical"
+        android:background="@drawable/dark" >
 
-        <RelativeLayout
-            android:id="@+id/checkboxes"
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/dark"
-            android:gravity="center_horizontal|center_vertical" >
+            android:orientation="vertical">
 
             <RelativeLayout
-                android:id="@+id/leftcolumn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:paddingTop="15dp" >
-
-                <RadioGroup
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" >
-
-                    <RadioButton
-                        android:id="@+id/checkBox1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/checkbox_background"
-                        android:button="@drawable/checkbox"
-                        android:text="@string/cb1"
-                        android:textColor="#f9ce46"
-                        android:textSize="18dp" >
-                    </RadioButton>
-
-                    <RadioButton
-                        android:id="@+id/checkBox2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/checkBox1"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/checkbox_background"
-                        android:button="@drawable/checkbox"
-                        android:text="@string/cb2"
-                        android:textColor="#f9ce46"
-                        android:textSize="18dp" >
-                    </RadioButton>
-
-                    <RadioButton
-                        android:id="@+id/checkBox3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/checkBox2"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/checkbox_background"
-                        android:button="@drawable/checkbox"
-                        android:text="@string/cb3"
-                        android:textColor="#f9ce46"
-                        android:textSize="18dp" >
-                    </RadioButton>
-                </RadioGroup>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rightcolumn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/leftcolumn"
-                android:padding="20dp" >
-
-                <RadioGroup
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" >
-
-                    <RadioButton
-                        android:id="@+id/checkBox4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/checkbox_background"
-                        android:button="@drawable/checkbox"
-                        android:text="@string/cb4"
-                        android:textColor="#f9ce46"
-                        android:textSize="18dp" />
-
-                    <RadioButton
-                        android:id="@+id/checkBox5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/checkBox4"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/checkbox_background"
-                        android:button="@drawable/checkbox"
-                        android:text="@string/cb5"
-                        android:textColor="#f9ce46"
-                        android:textSize="18dp" />
-                </RadioGroup>
-            </RelativeLayout>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/comment_area"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="@drawable/dark"
-            android:gravity="center_horizontal" >
-
-            <TextView
-                android:id="@+id/comment_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dip"
-                android:text="@string/comment_title"
-                android:textColor="#f9ce46"
-                android:textSize="18dp" />
-
-            <TextView
-                android:id="@+id/comment_example"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/comment_title"
-                android:layout_marginBottom="10dip"
-                android:layout_marginLeft="20dip"
-                android:text="@string/comment_example"
-                android:textColor="#ffffff"
-                android:textSize="16dp" />
-
-            <EditText
-                android:id="@+id/comment"
+                android:id="@+id/checkboxes"
                 android:layout_width="fill_parent"
-                android:layout_height="70dp"
-                android:layout_below="@id/comment_example"
-                android:layout_marginLeft="20dip"
-                android:layout_marginRight="20dip"
-                android:background="@drawable/rounded_edittext"
-                android:padding="5dip"
-                android:textSize="18dp" />
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal|center_vertical" >
+
+                <RelativeLayout
+                    android:id="@+id/leftcolumn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="15dp" >
+
+                    <RadioGroup
+                        android:id="@+id/rg1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" >
+
+                        <RadioButton
+                            android:id="@+id/checkBox1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/checkbox_background"
+                            android:button="@drawable/checkbox"
+                            android:text="@string/cb1"
+                            android:textColor="#f9ce46"
+                            android:textSize="18sp" >
+                        </RadioButton>
+
+                        <RadioButton
+                            android:id="@+id/checkBox2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/checkBox1"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/checkbox_background"
+                            android:button="@drawable/checkbox"
+                            android:text="@string/cb2"
+                            android:textColor="#f9ce46"
+                            android:textSize="18sp" >
+                        </RadioButton>
+
+                        <RadioButton
+                            android:id="@+id/checkBox3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/checkBox2"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/checkbox_background"
+                            android:button="@drawable/checkbox"
+                            android:text="@string/cb3"
+                            android:textColor="#f9ce46"
+                            android:textSize="18sp" >
+                        </RadioButton>
+                    </RadioGroup>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rightcolumn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/leftcolumn"
+                    android:padding="20dp" >
+
+                    <RadioGroup
+                        android:id="@+id/rg2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" >
+
+                        <RadioButton
+                            android:id="@+id/checkBox4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/checkbox_background"
+                            android:button="@drawable/checkbox"
+                            android:text="@string/cb4"
+                            android:textColor="#f9ce46"
+                            android:textSize="18sp" />
+
+                        <RadioButton
+                            android:id="@+id/checkBox5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/checkBox4"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/checkbox_background"
+                            android:button="@drawable/checkbox"
+                            android:text="@string/cb5"
+                            android:textColor="#f9ce46"
+                            android:textSize="18sp" />
+                    </RadioGroup>
+                </RelativeLayout>
+            </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/upload_area"
+                android:id="@+id/comment_area"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_below="@id/comment"
-                android:gravity="bottom|center_horizontal"
-                android:orientation="vertical"
-                android:padding="5dip" >
+                android:gravity="center_horizontal" >
 
-                <Button
-                    android:id="@+id/upload_button"
+                <TextView
+                    android:id="@+id/comment_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/button_green_circle"
-                    android:drawablePadding="10sp"
-                    android:drawableTop="@drawable/ic_save"
-                    android:text="@string/save_picture"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
+                    android:layout_marginLeft="20dip"
+                    android:text="@string/comment_title"
+                    android:textColor="#f9ce46"
+                    android:textSize="18sp" />
 
-                <Button
-                    android:id="@+id/retake_button"
+                <TextView
+                    android:id="@+id/comment_example"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/upload_button"
+                    android:layout_marginLeft="3dp"
+                    android:layout_toRightOf="@id/comment_title"
+                    android:text="@string/comment_example"
+                    android:textColor="#ffffff"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/comment"
+                    android:layout_width="fill_parent"
+                    android:layout_height="35dp"
+                    android:layout_below="@id/comment_example"
                     android:layout_marginLeft="20dp"
-                    android:layout_toRightOf="@+id/upload_button"
-                    android:background="@drawable/button_green_circle_retake"
-                    android:text="@string/retake_picture"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-        </RelativeLayout>
-    </LinearLayout>
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="3dp"
+                    android:background="@drawable/rounded_edittext"
+                    android:padding="5dip"
+                    android:textSize="18sp" />
 
-</ScrollView>
+                <RelativeLayout
+                    android:id="@+id/upload_area"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_below="@id/comment"
+                    android:gravity="bottom|center_horizontal"
+                    android:orientation="vertical"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="10dp" >
+
+                    <Button
+                        android:id="@+id/upload_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/button_green_circle"
+                        android:drawablePadding="10dp"
+                        android:drawableTop="@drawable/ic_save"
+                        android:text="@string/save_picture"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/retake_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/upload_button"
+                        android:layout_marginLeft="20dp"
+                        android:layout_toRightOf="@+id/upload_button"
+                        android:background="@drawable/button_green_circle_retake"
+                        android:text="@string/retake_picture"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+  </LinearLayout>

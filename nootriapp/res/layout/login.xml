@@ -5,7 +5,7 @@
     android:layout_height="fill_parent"
     android:layout_gravity="center"
     android:gravity="center_vertical"
-    android:background="#d1f0ff">
+    android:background="@drawable/background">
 <RelativeLayout android:id="@+id/login_layout"
 		xmlns:android="http://schemas.android.com/apk/res/android"
 	    android:layout_width="fill_parent"
@@ -26,8 +26,8 @@
 			android:layout_below="@id/login_logo"
 			android:layout_height="wrap_content"
 			android:layout_marginLeft="10dip"
-			android:textSize="17dip"
-			android:textColor="#2b3134"
+			android:textSize="17sp"
+			android:textColor="#f9ce46"
 			android:text="@string/login_username_title_text"/>
 			
 		<EditText
@@ -35,11 +35,12 @@
 	        android:layout_width="fill_parent"
 	    	android:layout_marginLeft="10dip"
 	    	android:layout_marginRight="10dip"
-	        android:textSize="22dip"
+	        android:textSize="22sp"
 	        android:layout_height="wrap_content"
 			android:layout_below="@id/login_username_title" 
 	        android:layout_marginBottom="12dip"
 	        android:background="@android:drawable/editbox_background"
+	        android:inputType="textEmailAddress"
 	        android:singleLine="true"/>
 	        
 	    
@@ -48,8 +49,8 @@
 			android:layout_height="wrap_content"
 			android:layout_below="@id/login_username_textbox" 
 			android:layout_marginLeft="10dip"
-			android:textSize="17dip"
-			android:textColor="#2b3134"
+			android:textSize="17sp"
+			android:textColor="#f9ce46"
 			android:text="@string/login_password_title_text"/>
 			    
 		<EditText
@@ -57,20 +58,21 @@
 	        android:layout_width="fill_parent"
 	        android:layout_alignLeft="@id/login_username_textbox"
 	        android:layout_alignRight="@id/login_username_textbox"
-	        android:textSize="22dip"
+	        android:textSize="22sp"
 	        android:layout_height="wrap_content"
 			android:layout_below="@id/login_password_title" 
 	        android:layout_marginBottom="12dip"
 	        android:background="@android:drawable/editbox_background"
 	        android:singleLine="true"
-	        android:password="true"
+	        android:inputType="textPassword"
 	        android:text=""/>
 	        
         <Button
 	        android:id="@+id/login_button_sign"
 	        android:textColor="#FFFFFFFF"
 	        android:background="@drawable/button_green"
-	        android:textSize="18dip"
+	        android:textSize="18sp"
+            android:textStyle="bold"
 	        android:layout_width="180dip"
 	        android:layout_height="wrap_content"
 	        android:layout_marginBottom="12dip"
@@ -82,7 +84,8 @@
 	        android:id="@+id/login_button_create"
 	        android:textColor="#FFFFFFFF"
 	        android:background="@drawable/button_green"
-	        android:textSize="18dip"
+	        android:textSize="18sp"
+            android:textStyle="bold"
 	        android:layout_width="180dip"
 	        android:layout_height="wrap_content"
 	        android:layout_below="@id/login_button_sign"

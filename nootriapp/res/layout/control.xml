@@ -3,21 +3,21 @@
     android:id="@+id/background"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:gravity="bottom|center_horizontal"
     android:orientation="vertical"
-    android:padding="10dip" 
-    android:gravity="bottom">
+    android:padding="10dip" >
 
     <Button
         android:id="@+id/takepicture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_green_circle"
-        android:drawableTop="@drawable/ic_shoot"
         android:layout_gravity="center_horizontal"
+        android:background="@drawable/button_green_circle"
         android:drawablePadding="10sp"
+        android:drawableTop="@drawable/ic_shoot"
         android:text="@string/take_picture_button"
         android:textColor="#FFFFFF"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <Button
@@ -25,12 +25,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/takepicture"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="20dp"
         android:layout_toRightOf="@+id/takepicture"
         android:background="@drawable/button_green_circle_menu"
         android:text="@string/menu_button"
         android:textColor="#FFFFFF"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
 </RelativeLayout>

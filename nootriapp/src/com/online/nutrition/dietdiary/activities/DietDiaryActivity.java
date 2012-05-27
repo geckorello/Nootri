@@ -10,9 +10,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -52,6 +52,7 @@ public class DietDiaryActivity extends Activity {
 	private Button mTakePictureButton;
 	private Button mReviewHistoryButton;
 	private Button mReviewStatsButton;
+	private Button mImporoveHealthButton;
 
 	/*
 	 * (non-Javadoc)
@@ -228,7 +229,7 @@ public class DietDiaryActivity extends Activity {
 			public void onClick(View v) {
 
 				Intent i = new Intent(getApplicationContext(),
-						HistoryActivity2.class);
+						HistoryActivity.class);
 				startActivity(i);
 
 			}
@@ -241,6 +242,17 @@ public class DietDiaryActivity extends Activity {
 						StatsActivity.class);
 				startActivity(i);
 
+			}
+		});
+		//open pricing website
+		mImporoveHealthButton = (Button) findViewById(R.id.review_health);
+		mImporoveHealthButton.setOnClickListener(new OnClickListener() {
+			public void onClick(View arg0) {
+ 
+			  Intent browserIntent = 
+                            new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.nootri.com"));
+			    startActivity(browserIntent);
+ 
 			}
 		});
 	}

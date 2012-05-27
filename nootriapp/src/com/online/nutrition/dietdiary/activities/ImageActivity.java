@@ -12,10 +12,12 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.online.nutrition.dietdiary.R;
@@ -37,7 +39,13 @@ public class ImageActivity extends Activity {
 	private Button mUploadButton;
 	private Button mRetakeButton;
 	
+	//radio uncheck hack
+	boolean hack1 = false;
+	boolean hack2 = false;
+	
 	// additional info
+	private RadioGroup mRadioGroup1;
+	private RadioGroup mRadioGroup2;
 	private RadioButton mCheckBox1;
 	private RadioButton mCheckBox2;
 	private RadioButton mCheckBox3;
@@ -75,13 +83,79 @@ public class ImageActivity extends Activity {
 		imageLayout.setBackgroundDrawable(d);
 
 		// Read additional information
+		mRadioGroup1 = (RadioGroup) findViewById(R.id.rg1);
+		mRadioGroup2 = (RadioGroup) findViewById(R.id.rg2);
+		
 		mCheckBox1 = (RadioButton) findViewById(R.id.checkBox1);
 		mCheckBox2 = (RadioButton) findViewById(R.id.checkBox2);
 		mCheckBox3 = (RadioButton) findViewById(R.id.checkBox3);
 		mCheckBox4 = (RadioButton) findViewById(R.id.checkBox4);
 		mCheckBox5 = (RadioButton) findViewById(R.id.checkBox5);
 		mComment = (EditText) findViewById(R.id.comment);
+		
+		OnClickListener radioClickListener1 = new OnClickListener()
+	    {
 
+	        public void onClick(View v)
+	        {
+	            if (v.getId() == mRadioGroup1.getCheckedRadioButtonId() && hack1)
+	            {
+	            	mRadioGroup1.clearCheck();
+	            }
+	            else
+	            {
+	                hack1 = true;
+	            }
+	        }
+	    };
+
+	    OnCheckedChangeListener radioCheckChangeListener1 = new OnCheckedChangeListener()
+	    {
+
+	        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+	        {
+	            hack1 = false;
+	        }
+	    };
+	    
+	    OnClickListener radioClickListener2 = new OnClickListener()
+	    {
+
+	        public void onClick(View v)
+	        {
+	            if (v.getId() == mRadioGroup2.getCheckedRadioButtonId() && hack2)
+	            {
+	            	mRadioGroup2.clearCheck();
+	            }
+	            else
+	            {
+	                hack2 = true;
+	            }
+	        }
+	    };
+
+	    OnCheckedChangeListener radioCheckChangeListener2 = new OnCheckedChangeListener()
+	    {
+
+	        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+	        {
+	            hack2 = false;
+	        }
+	    };
+
+	    mCheckBox1.setOnCheckedChangeListener(radioCheckChangeListener1);
+	    mCheckBox2.setOnCheckedChangeListener(radioCheckChangeListener1);
+	    mCheckBox3.setOnCheckedChangeListener(radioCheckChangeListener1);
+
+	    mCheckBox1.setOnClickListener(radioClickListener1);
+	    mCheckBox2.setOnClickListener(radioClickListener1);
+	    mCheckBox3.setOnClickListener(radioClickListener1);
+	    
+	    mCheckBox4.setOnCheckedChangeListener(radioCheckChangeListener2);
+	    mCheckBox5.setOnCheckedChangeListener(radioCheckChangeListener2);
+	    
+	    mCheckBox4.setOnClickListener(radioClickListener2);
+	    mCheckBox5.setOnClickListener(radioClickListener2);
 		
 		Bundle extras = getIntent().getExtras();
 		imageTime = extras.getString("time");
@@ -131,6 +205,9 @@ public class ImageActivity extends Activity {
 				Toast.makeText(ImageActivity.this,
 						getString(R.string.upload_prompt),
 						Toast.LENGTH_LONG).show();
+				Intent i = new Intent(getApplicationContext(),
+						CameraActivity.class);
+				startActivity(i);
 				// close view
 				finish();
 

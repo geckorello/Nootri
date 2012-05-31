@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="month_names">
+		<item>Januar</item>
+		<item>Februar</item>
+		<item>März</item>
+		<item>April</item>
+		<item>Mai</item>
+		<item>Juni</item>
+		<item>Juli</item>
+		<item>August</item>
+		<item>September</item>
+		<item>Oktober</item>
+		<item>November</item>
+		<item>Dezember</item>
+	</string-array>
+	<string-array name="weekday_names">
+		<item>Sonntag</item>
+		<item>Montag</item>
+		<item>Dienstag</item>
+		<item>Mittwoch</item>
+		<item>Donnerstag</item>
+		<item>Freitag</item>
+		<item>Samstag</item>
+	</string-array>
+</resources>
